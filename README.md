@@ -15,13 +15,18 @@ The plugin's JavaScript functions are called after creating the plugin object th
         var kc = new Keychain();
         kc.getForKey(win, fail, "some_key", "some_servicename");
 
-### iCloud keychain enabled
+### iCloud keychain disabled
 
-iCloud keychain synchonizing is enabled, so the keychain will be mirrored across all devices *if* the user is signed in to iCloud (Settings > iCloud) and has iCloud keychain turned on (Settings > iCloud > Keychain)
+iCloud keychain synchronizing is disabled, so the keychain won't be mirrored across all devices.
 
 ### Usage
         
 **Important:**
+
+#### Android
+
+- The plugin requires strings for Password, FileName, and TAG in the KeychainPlugin class, which are left blank in this repo.
+- The Android portion of the plugin only accepts strings and stores them in the Android KeyStore
 
 ```js
 If you are saving a JSON string value in setForKey, for example after applying JSON.stringify on an object, you must escape the characters in that string, if not you cannot retrieve it using getForKey.        
