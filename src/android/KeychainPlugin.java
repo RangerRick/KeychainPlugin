@@ -35,31 +35,31 @@ public class KeychainPlugin extends CordovaPlugin {
 
     public boolean execute(String action, JSONArray data, CallbackContext callbackContext) throws JSONException {
         if (action.equals("getForKey")) {
-                rwl.readLock().lock();
-                try {
-                    GetForKey getForKey = new GetForKey(data, callbackContext);
-                    cordova.getThreadPool().execute(getForKey);
-                } finally {
-                    rwl.readLock().unlock();
-                }
+            rwl.readLock().lock();
+            try {
+                GetForKey getForKey = new GetForKey(data, callbackContext);
+                cordova.getThreadPool().execute(getForKey);
+            } finally {
+                rwl.readLock().unlock();
+            }
             return true;
         } else if (action.equals("setForKey")) {
-                rwl.writeLock().lock();
-                try {
+            rwl.writeLock().lock();
+            try {
                 SetForKey setForKey = new SetForKey(data, callbackContext);
                 cordova.getThreadPool().execute(setForKey);
-                } finally {
-                    rwl.writeLock().unlock();
-                }
+            } finally {
+                rwl.writeLock().unlock();
+            }
             return true;
         } else if (action.equals("removeForKey")) {
-                rwl.writeLock().lock();
-                try {
+            rwl.writeLock().lock();
+            try {
                 RemoveForKey removeForKey = new RemoveForKey (data, callbackContext);
                 cordova.getThreadPool().execute(removeForKey);
-                } finally {
-                    rwl.writeLock().unlock();
-                }
+            } finally {
+                rwl.writeLock().unlock();
+            }
             return true;
         } else {
             Log.d("PLUGIN", "unknown action");
