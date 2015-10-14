@@ -45,6 +45,6 @@
             </feature>
         </config-file>
 
-        <source-file src="src/Android/KeychainPlugin.java" target-dir="src/com/synconset" />
+        <source-file src="src/android/KeychainPlugin.java" target-dir="src/com/synconset" />
     </platform>
 </plugin>
