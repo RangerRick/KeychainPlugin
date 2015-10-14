@@ -12,15 +12,15 @@
         <engine name="cordova" version=">=3.0.0" />
     </engines>
 	
-    <js-module src="www/keychain.js" name="Keychain">
-        <clobbers target="window.Keychain" />
+    <js-module src="www/keychain.js" name="CordovaKeychain">
+        <clobbers target="CordovaKeychain" />
     </js-module>
 	
     <!-- ios -->
     <platform name="ios">
         <!-- feature tag in config.xml -->
         <config-file target="config.xml" parent="/widget">
-          <feature name="Keychain">
+          <feature name="CordovaKeychain">
             <param name="ios-package" value="CDVKeychain"/>
           </feature>
         </config-file>
@@ -38,7 +38,7 @@
     </platform>
     <platform name="android">
         <config-file target="res/xml/config.xml" parent="/*">
-            <feature name="Keychain">
+            <feature name="CordovaKeychain">
                 <param name="android-package" value="com.synconset.KeychainPlugin"/>
             </feature>
         </config-file>

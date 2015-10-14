@@ -21,37 +21,37 @@
 
 var exec = require('cordova/exec');
 
-var Keychain = function() {
-	this.serviceName = "Keychain";
+var CordovaKeychain = function() {
+	this.serviceName = "CordovaKeychain";
 };
 
-Keychain.prototype.getForKey = function(successCallback, failureCallback, key, servicename)
+CordovaKeychain.prototype.getForKey = function(successCallback, failureCallback, key, servicename)
 {
 	exec(successCallback, failureCallback, this.serviceName, "getForKey", [key, servicename]);
 }
 
-Keychain.prototype.setForKey = function(successCallback, failureCallback, key, servicename, value)
+CordovaKeychain.prototype.setForKey = function(successCallback, failureCallback, key, servicename, value)
 {
 	exec(successCallback, failureCallback, this.serviceName, "setForKey", [key, servicename, value]);
 }
 
-Keychain.prototype.removeForKey = function(successCallback, failureCallback, key, servicename)
+CordovaKeychain.prototype.removeForKey = function(successCallback, failureCallback, key, servicename)
 {
 	exec(successCallback, failureCallback, this.serviceName, "removeForKey", [key, servicename]);
 }
 
 // Shared
 
-Keychain.prototype.getForKeyShared = function(successCallback, failureCallback, key, servicename, accessgroup) {
+CordovaKeychain.prototype.getForKeyShared = function(successCallback, failureCallback, key, servicename, accessgroup) {
 	exec(successCallback, failureCallback, this.serviceName, "getForKeyShared", [key, servicename, accessgroup]);
 }
 
-Keychain.prototype.setForKeyShared = function(successCallback, failureCallback, key, servicename, accessgroup, value) {
+CordovaKeychain.prototype.setForKeyShared = function(successCallback, failureCallback, key, servicename, accessgroup, value) {
 	exec(successCallback, failureCallback, this.serviceName, "setForKeyShared", [key, servicename, accessgroup, value]);
 }
 
-Keychain.prototype.removeForKeyShared = function(successCallback, failureCallback, key, servicename, accessgroup) {
+CordovaKeychain.prototype.removeForKeyShared = function(successCallback, failureCallback, key, servicename, accessgroup) {
 	exec(successCallback, failureCallback, this.serviceName, "removeForKeyShared", [key, servicename, accessgroup]);
 }
 
-module.exports = Keychain;
+module.exports = CordovaKeychain;

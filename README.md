@@ -8,11 +8,11 @@ Follows the [Cordova Plugin spec](http://cordova.apache.org/docs/en/3.0.0/plugin
  
 Manually importing the plugin is not supported anymore, please use [Plugman](http://npmjs.org/plugman)     or the [Cordova CLI tool](http://npmjs.org/cordova)    
 
-The "Keychain" object definition is installed globally. 
+The "CordovaKeychain" object definition is installed globally.
 
 The plugin's JavaScript functions are called after creating the plugin object thus:
  
-        var kc = new Keychain();
+        var kc = new CordovaKeychain();
         kc.getForKey(win, fail, "some_key", "some_servicename");
 
 ### iCloud keychain disabled
@@ -49,7 +49,7 @@ See the **example** folder for example usage.
 
 ```js
 // Get a reference to the plugin first
-var kc = new Keychain();
+var kc = new CordovaKeychain();
 
 /*
  Retrieves a value for a key and servicename.
