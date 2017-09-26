@@ -35,31 +35,16 @@ public class KeychainPlugin extends CordovaPlugin {
 
     public boolean execute(String action, JSONArray data, CallbackContext callbackContext) throws JSONException {
         if (action.equals("getForKey")) {
-            rwl.readLock().lock();
-            try {
-                GetForKey getForKey = new GetForKey(data, callbackContext);
-                cordova.getThreadPool().execute(getForKey);
-            } finally {
-                rwl.readLock().unlock();
-            }
+            GetForKey getForKey = new GetForKey(data, callbackContext);
+            cordova.getThreadPool().execute(getForKey);
             return true;
         } else if (action.equals("setForKey")) {
-            rwl.writeLock().lock();
-            try {
-                SetForKey setForKey = new SetForKey(data, callbackContext);
-                cordova.getThreadPool().execute(setForKey);
-            } finally {
-                rwl.writeLock().unlock();
-            }
+            SetForKey setForKey = new SetForKey(data, callbackContext);
+            cordova.getThreadPool().execute(setForKey);
             return true;
         } else if (action.equals("removeForKey")) {
-            rwl.writeLock().lock();
-            try {
-                RemoveForKey removeForKey = new RemoveForKey (data, callbackContext);
-                cordova.getThreadPool().execute(removeForKey);
-            } finally {
-                rwl.writeLock().unlock();
-            }
+            RemoveForKey removeForKey = new RemoveForKey (data, callbackContext);
+            cordova.getThreadPool().execute(removeForKey);
             return true;
         } else {
             Log.d("PLUGIN", "unknown action");
@@ -103,6 +88,7 @@ public class KeychainPlugin extends CordovaPlugin {
 
         @Override
         public void run() {
+            rwl.readLock().lock();
             try {
                 loadKeyStore(cordova.getActivity().getApplicationContext());
 
@@ -126,6 +112,8 @@ public class KeychainPlugin extends CordovaPlugin {
             } catch (IOException e) {
                 Log.w(TAG, "IOException", e);
                 callbackContext.error(e.getMessage());
+            } finally {
+                rwl.readLock().unlock();
             }
         }
     }
@@ -137,6 +125,7 @@ public class KeychainPlugin extends CordovaPlugin {
 
         @Override
         public void run() {
+            rwl.writeLock().lock();
             try {
                 loadKeyStore(cordova.getActivity().getApplicationContext());
 
@@ -159,6 +148,8 @@ public class KeychainPlugin extends CordovaPlugin {
             } catch (CertificateException e) {
                 Log.w(TAG, "CertificateException", e);
                 callbackContext.error(e.getMessage());
+            } finally {
+                rwl.writeLock().unlock();
             }
         }
     }
@@ -170,6 +161,7 @@ public class KeychainPlugin extends CordovaPlugin {
 
         @Override
         public void run() {
+            rwl.writeLock().lock();
             try {
                 loadKeyStore(cordova.getActivity().getApplicationContext());
 
@@ -189,6 +181,8 @@ public class KeychainPlugin extends CordovaPlugin {
             } catch (CertificateException e) {
                 Log.w(TAG, "CertificateException", e);
                 callbackContext.error(e.getMessage());
+            } finally {
+                rwl.writeLock().unlock();
             }
         }
     }
